@@ -23,4 +23,7 @@ public class CourseRegistry {
         this.emailId = emailId;
         this.courseName = courseName;
     }
+
+    public CourseRegistry() {
+    }
 }

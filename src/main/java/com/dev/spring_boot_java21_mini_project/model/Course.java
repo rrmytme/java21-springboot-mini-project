@@ -12,4 +12,13 @@ public class Course {
     private String courseName;
     private String trainer;
     private int durationInWeeks;
+
+    public Course() {
+    }
+
+    public Course(String courseName, String trainer, int durationInWeeks) {
+        this.courseName = courseName;
+        this.trainer = trainer;
+        this.durationInWeeks = durationInWeeks;
+    }
 }
