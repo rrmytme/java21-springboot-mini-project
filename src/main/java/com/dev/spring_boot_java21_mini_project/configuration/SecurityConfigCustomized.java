@@ -27,7 +27,7 @@ public class SecurityConfigCustomized {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // 1. Disable CSRF
-        http.csrf(customizer -> customizer.disable());
+        http.csrf(csrf -> csrf.disable());
         // 2. Same site strict -> will do this in application.properties
         // 3. Change session -> Stateless
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
@@ -38,7 +38,9 @@ public class SecurityConfigCustomized {
                 .requestMatchers("/public/**").permitAll()
                 .anyRequest().authenticated());
         // 5. enable default form login for web logins if require
-//        http.formLogin(Customizer.withDefaults());
+        // http.formLogin(Customizer.withDefaults());
+        // or
+//        http.formLogin(form -> form.permitAll().defaultSuccessUrl("/public/courses"))
         // 6. enable basic form login for postman logins
         http.httpBasic(Customizer.withDefaults());
         return http.build();
@@ -58,12 +60,12 @@ public class SecurityConfigCustomized {
 //        UserDetails user1 = User
 //                .withDefaultPasswordEncoder()
 //                .username("test1")
-//                .password("test1")
+//                .password("test1").roles("ADMIN")
 //                .build();
 //        UserDetails user2 = User
 //                .withDefaultPasswordEncoder()
 //                .username("test2")
-//                .password("test2")
+//                .password("test2").roles("USER")
 //                .build();
 //        return new InMemoryUserDetailsManager(user1, user2);
 //    }
